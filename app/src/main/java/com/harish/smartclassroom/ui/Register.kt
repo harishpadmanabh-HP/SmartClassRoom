@@ -36,6 +36,7 @@ class Register : AppCompatActivity() {
             selectedBatch = batchList[position]
             Toast.makeText(this, selectedBatch, Toast.LENGTH_SHORT).show()
           //
+
         }
     }
 
