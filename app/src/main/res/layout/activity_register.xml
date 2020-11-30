@@ -83,14 +83,16 @@
                         android:id="@+id/textInputMobile"
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent"
+                        app:endIconTint="@color/purple_200"
+                        app:endIconMode="dropdown_menu"
+                        android:hint="Batch"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_marginTop="@dimen/loginViewsMargin">
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/editTextMobile"
+                        app:endIconDrawable="@drawable/ic_baseline_arrow_drop_down_24"                        android:layout_marginTop="@dimen/loginViewsMargin">
+                        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                            android:id="@+id/editTextBatch"
                             style="@style/modifiedEditText"
-                            android:inputType="phone"
                             android:maxLines="1"
-                            android:hint="Mobile Number"/>
+                            />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout

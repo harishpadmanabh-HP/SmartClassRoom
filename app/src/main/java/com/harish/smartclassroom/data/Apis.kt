@@ -12,7 +12,7 @@ import retrofit2.http.GET
 
 interface Apis {
 
-    @GET("/view_batch.php")
+    @GET("view_batch.php")
     fun getBatches(): Call<BatchResponse>
 
 
