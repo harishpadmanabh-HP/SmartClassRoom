@@ -20,7 +20,6 @@ class OnBoardingViewModel( var application: Application) : ViewModel() {
     })
 
 
-
 }
 
 open class OnbaordingViewModelFactory(val app: Application) : ViewModelProvider.AndroidViewModelFactory(app){
