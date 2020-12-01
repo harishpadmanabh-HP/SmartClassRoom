@@ -48,11 +48,10 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginTop="@dimen/loginViewsMargin">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextEmail"
+                    android:id="@+id/editTextRegno"
                     style="@style/modifiedEditText"
-                    android:inputType="textEmailAddress"
                     android:maxLines="1"
-                    android:hint="@string/login_email_hint"/>
+                    android:hint="Register number"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -82,6 +81,7 @@
                 app:spinning_bar_width="4dp"
                 app:spinning_bar_color="#FFF"
                 android:text="Login"
+                android:onClick="onLoginClick"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/loginViewsMargin"
                 app:spinning_bar_padding="6dp"
@@ -93,9 +93,10 @@
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="17sp"
+                android:onClick="registerClicked"
                 android:text="New user? Register Now"
                 android:layout_marginTop="@dimen/loginViewsMargin"
-                android:onClick="onLoginClick"/>
+                />
 
 
             <LinearLayout
