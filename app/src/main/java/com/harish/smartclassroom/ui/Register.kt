@@ -9,12 +9,15 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
 import com.harish.smartclassroom.R
 import com.harish.smartclassroom.data.AppData
 import com.harish.smartclassroom.data.models.BatchResponse
 import com.harish.smartclassroom.viewmodels.OnBoardingViewModel
 import com.harish.smartclassroom.viewmodels.OnbaordingViewModelFactory
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.android.synthetic.main.activity_login.rl_root as rl_root1
 
 
 class Register : AppCompatActivity() {
@@ -71,7 +74,14 @@ class Register : AppCompatActivity() {
                 Toast.makeText(this@Register, it, Toast.LENGTH_SHORT).show()
             })
             registrationstatus.observe(this@Register, Observer {
-                Toast.makeText(this@Register,it.status, Toast.LENGTH_SHORT).show()
+
+                if(it.status.equals("success")){
+                    appData.setLoggedin(true)
+                    startActivity(Intent(this@Register,StudentHome::class.java))
+                }else{
+                    Snackbar.make(rl_root,"Registration failed", Snackbar.LENGTH_LONG).show()
+                }
+
             })
         }
 

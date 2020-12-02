@@ -7,7 +7,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
 import com.harish.smartclassroom.R
+import com.harish.smartclassroom.data.AppData
 import com.harish.smartclassroom.viewmodels.OnBoardingViewModel
 import com.harish.smartclassroom.viewmodels.OnbaordingViewModelFactory
 import kotlinx.android.synthetic.main.activity_login.*
@@ -15,12 +17,14 @@ import kotlinx.android.synthetic.main.activity_login.*
 class Login : AppCompatActivity() {
 
     lateinit var viewModel : OnBoardingViewModel
+    lateinit var appData : AppData
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         val viewModelFactory = OnbaordingViewModelFactory(application)
         viewModel = ViewModelProvider(this,viewModelFactory).get(OnBoardingViewModel::class.java)
+        appData = AppData.init(this)
         setupObserver()
 
     }
@@ -45,7 +49,15 @@ class Login : AppCompatActivity() {
     fun setupObserver()
     {
         viewModel.loginstatus.observe(this@Login, Observer {
-            Toast.makeText(this@Login, it.status, Toast.LENGTH_SHORT).show()
+
+            if(it.status.equals("Success")){
+                appData.setSemester(it.Student_data.semester)
+                appData.setBatchId(it.Student_data.batch_id)
+                appData.setLoggedin(true)
+                startActivity(Intent(this@Login,StudentHome::class.java))
+            }else{
+                Snackbar.make(rl_root,"Login failed",Snackbar.LENGTH_LONG).show()
+            }
         })
         viewModel.events.observe(this@Login, Observer {
             Toast.makeText(this@Login, it, Toast.LENGTH_SHORT).show()

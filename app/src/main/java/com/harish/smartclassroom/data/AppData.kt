@@ -41,4 +41,19 @@ object AppData {
         return sem
     }
 
+    fun setLoggedin(status:Boolean){
+        val editor = preferences?.edit()
+        editor?.putBoolean("loggedin",status )
+        editor?.apply()
+
+    }
+
+    fun hasLoggedin():Boolean{
+        var status =false
+         preferences?.let { it ->
+            status = it.getBoolean("loggedin",false)
+        }
+        return status
+    }
+
 }
