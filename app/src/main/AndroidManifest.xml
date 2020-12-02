@@ -14,15 +14,15 @@
         android:theme="@style/Theme.SmartClassRoom"
         android:usesCleartextTraffic="true">
         <activity android:name=".ui.Login">
+
+        </activity>
+        <activity android:name=".ui.Register" />
+        <activity android:name=".ui.StudentHome">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".ui.Register" />
-        <activity android:name=".ui.StudentHome">
-
         </activity>
         <activity android:name=".MainActivity"></activity>
 

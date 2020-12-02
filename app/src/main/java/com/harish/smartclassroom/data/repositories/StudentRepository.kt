@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.harish.smartclassroom.R
 import com.harish.smartclassroom.data.Apis
+import com.harish.smartclassroom.data.models.AssignmentListResponse
 import com.harish.smartclassroom.data.models.BatchResponse
 import com.harish.smartclassroom.data.models.LoginResponse
 import com.harish.smartclassroom.data.models.RegistrationResponse
@@ -35,6 +36,7 @@ private   val api = Apis()
           }
       })
     }
+
     fun getLoginStatus(regno:String,password:String,onResponse: (status: Boolean, message: String?, response: LoginResponse?) -> Unit)
     {
         api.getLoginStatus(regno,password).enqueue(object:Callback<LoginResponse>{
@@ -76,6 +78,29 @@ private   val api = Apis()
       }
     })
  }
+
+
+    fun getAssignmentList(sem:String,batch: String,onResponse: (status: Boolean, message: String?, response: AssignmentListResponse?) -> Unit){
+        api.getAssignmentList(sem,batch).enqueue(object:Callback<AssignmentListResponse>{
+            override fun onFailure(call: Call<AssignmentListResponse>, t: Throwable) {
+                if(!Utils.hasInternetConnection(context.applicationContext)){
+                    onResponse(false,context.getString(R.string.offline),null)
+                }else{
+                    onResponse(false,context.getString(R.string.server_error),null)
+                }
+            }
+
+            override fun onResponse(call: Call<AssignmentListResponse>, response: Response<AssignmentListResponse>) {
+                if(response.isSuccessful){
+                    onResponse(true,"",response.body())
+                }else{
+                    onResponse(false,context.getString(R.string.server_error),null)
+                }
+            }
+        })
+
+
+    }
 
 
 }
