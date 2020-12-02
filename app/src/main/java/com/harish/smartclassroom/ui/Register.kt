@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.harish.smartclassroom.R
+import com.harish.smartclassroom.data.AppData
 import com.harish.smartclassroom.data.models.BatchResponse
 import com.harish.smartclassroom.viewmodels.OnBoardingViewModel
 import com.harish.smartclassroom.viewmodels.OnbaordingViewModelFactory
@@ -23,6 +24,8 @@ class Register : AppCompatActivity() {
     var selectedBatch : String ?=null
     val semList:List<String> = listOf("S1","S2","S3","S4","S5","S6","S7","S8")
     var selectedSem : String? = null
+    lateinit var appData:AppData
+    var batchResponse : BatchResponse ?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,14 +34,20 @@ class Register : AppCompatActivity() {
         val viewModelFactory = OnbaordingViewModelFactory(application)
         viewModel = ViewModelProvider(this,viewModelFactory).get(OnBoardingViewModel::class.java)
 
+        appData = AppData.init(this)
+
         viewModel.getBatches()
         setupObservers()
 
         editTextBatch.setOnItemClickListener { adapterView, view, position, _ ->
             selectedBatch = batchList[position]
+            batchResponse?.batchDetails?.get(position)?.batchId?.let {
+                appData.setBatchId(it)
+            }
         }
         regeditTextSem.setOnItemClickListener{adapterView, view, position, _ ->
             selectedSem = semList[position]
+            appData.setSemester(selectedSem!!)
         }
     }
 
@@ -51,6 +60,7 @@ class Register : AppCompatActivity() {
     fun setupObservers(){
         viewModel.apply{
             batches.observe(this@Register, Observer {
+                batchResponse =it
                 batchList=it.batchDetails.map {
                     it.batchName
                 }

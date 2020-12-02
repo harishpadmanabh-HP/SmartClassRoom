@@ -1,5 +1,6 @@
 package com.harish.smartclassroom.data
 
+import com.harish.smartclassroom.data.models.AssignmentListResponse
 import com.harish.smartclassroom.data.models.BatchResponse
 import com.harish.smartclassroom.data.models.LoginResponse
 import com.harish.smartclassroom.data.models.RegistrationResponse
@@ -23,8 +24,17 @@ interface Apis {
 
     //student_reg.php?name=Athira&email=athira@gmail.com&batch=Computer%20Science&semester=S1&password=Athira@123&regno=CS001
     @GET("student_reg.php?")
-    fun getRegistrationStatus(@Query("name")name:String,@Query("email")email:String,@Query("batch")batch:String,@Query("semester")semester:String,
-     @Query("password")password:String,@Query("regno")regno:String):Call<RegistrationResponse>
+    fun getRegistrationStatus(@Query("name")name:String,
+                              @Query("email")email:String,
+                              @Query("batch")batch:String,
+                              @Query("semester")semester:String,
+                              @Query("password")password:String,
+                              @Query("regno")regno:String):Call<RegistrationResponse>
+
+    @GET("view_assignment.php?")
+    fun getAssignmentList(@Query("semester") semester: String,
+                          @Query("batch_id") batch: String):Call<AssignmentListResponse>
+
 
     companion object {
         operator fun invoke(): Apis {
