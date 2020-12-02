@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.harish.smartclassroom.data.models.BatchResponse
 import com.harish.smartclassroom.data.models.LoginResponse
+import com.harish.smartclassroom.data.models.RegistrationResponse
 import com.harish.smartclassroom.data.repositories.StudentRepository
 
 class OnBoardingViewModel( var application: Application) : ViewModel() {
@@ -15,6 +16,7 @@ class OnBoardingViewModel( var application: Application) : ViewModel() {
     val events : MutableLiveData<String> = MutableLiveData()
     val batches : MutableLiveData<BatchResponse> = MutableLiveData()
     val loginstatus:MutableLiveData<LoginResponse> =MutableLiveData()
+    val registrationstatus:MutableLiveData<RegistrationResponse> =MutableLiveData()
 
     fun getBatches()=repository.getBatches(onResponse = {status, message, response ->
        if(status) batches.postValue(response)
@@ -25,7 +27,11 @@ class OnBoardingViewModel( var application: Application) : ViewModel() {
         else events.postValue(message)
 
     })
+    fun getRegistrationStatus(name:String,email:String,batch:String,semester:String,password:String,regno:String)=repository.getRegistrationStatus(name, email, batch, semester, password, regno,onResponse = {status, message, response ->
+        if(status) registrationstatus.postValue(response)
+        else events.postValue(message)
 
+    })
 
 }
 

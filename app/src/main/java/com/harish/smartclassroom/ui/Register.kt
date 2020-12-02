@@ -60,7 +60,16 @@ class Register : AppCompatActivity() {
         }
 
     }
-
+fun setupRegistrationObservers(){
+    viewModel.apply {
+        registrationstatus.observe(this@Register, Observer {
+            Toast.makeText(this@Register,it.status, Toast.LENGTH_SHORT).show()
+        })
+        events.observe(this@Register, Observer {
+            Toast.makeText(this@Register,it, Toast.LENGTH_SHORT).show()
+        })
+    }
+}
     fun setUpBatchDropDown(batchList:List<String>){
         val d_adapter  = ArrayAdapter(
             this@Register,
@@ -74,7 +83,42 @@ class Register : AppCompatActivity() {
         editTextBatch.setTextColor(Color.BLACK)
     }
 
+    fun signupClick(view: View) {
+        var name=regeditTextName.text.toString()
+        var email=regeditTextEmail.text.toString()
+        var semester="S"+regeditTextSem.text.toString()
+        var password=regeditTextPassword.text.toString()
+        var regno=regeditTextRegno.text.toString()
 
+        if(name.isNullOrEmpty())
+        {
+            Toast.makeText(this, "Name is empty", Toast.LENGTH_SHORT).show()
+        }
+        else if(email.isNullOrEmpty())
+        {
+            Toast.makeText(this, "Email is empty", Toast.LENGTH_SHORT).show()
+        }
+        else if(selectedBatch.isNullOrEmpty())
+        {
+            Toast.makeText(this, "Select Batch", Toast.LENGTH_SHORT).show()
+        }
+        else if(semester.isNullOrEmpty())
+        {
+            Toast.makeText(this, "Select semester", Toast.LENGTH_SHORT).show()
+        }
+        else if(password.isNullOrEmpty())
+      {
+          Toast.makeText(this, "Enter password", Toast.LENGTH_SHORT).show()
+}
+        else if(regno.isNullOrEmpty())
+        {
+            Toast.makeText(this, "Enter regno", Toast.LENGTH_SHORT).show()
+        }
+        else
+        {
+            viewModel.getRegistrationStatus(name,email, selectedBatch.toString(), semester, password, regno)
+        }
+    }
 
 
 }
