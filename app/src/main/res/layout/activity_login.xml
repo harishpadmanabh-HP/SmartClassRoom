@@ -140,6 +140,6 @@
         android:src="@drawable/ic_facebook"
         android:layout_marginRight="11dp"
         android:layout_marginBottom="30dp"
-        android:onClick="onRegisterClick"
+        android:onClick="registerClicked"
         />
 </RelativeLayout>

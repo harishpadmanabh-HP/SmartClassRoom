@@ -6,6 +6,7 @@ import com.harish.smartclassroom.R
 import com.harish.smartclassroom.data.Apis
 import com.harish.smartclassroom.data.models.BatchResponse
 import com.harish.smartclassroom.data.models.LoginResponse
+import com.harish.smartclassroom.data.models.RegistrationResponse
 import com.harish.smartclassroom.util.Utils
 import retrofit2.Call
 import retrofit2.Callback
@@ -54,5 +55,27 @@ private   val api = Apis()
             }
         })
     }
+    fun getRegistrationStatus(name:String,email:String,batch:String,semester:String,password:String,regno:String,onResponse: (status: Boolean, message: String?, response: RegistrationResponse?) -> Unit)
+    {
+       api.getRegistrationStatus(name, email, batch, semester, password, regno).enqueue(object:Callback<RegistrationResponse>
+        {
+            override fun onFailure(call: Call<RegistrationResponse>, t: Throwable) {
+              if(!Utils.hasInternetConnection(context.applicationContext)){
+                onResponse(false,context.getString(R.string.offline),null)
+              }else{
+              onResponse(false,context.getString(R.string.server_error),null)
+              }
+        }
+
+      override fun onResponse(call: Call<RegistrationResponse>, response: Response<RegistrationResponse>) {
+          if(response.isSuccessful){
+              onResponse(true,"",response.body())
+          }else{
+              onResponse(false,context.getString(R.string.server_error),null)
+          }
+      }
+    })
+ }
+
 
 }

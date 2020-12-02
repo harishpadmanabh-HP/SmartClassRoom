@@ -39,6 +39,9 @@
                     android:rotationX="0"
                     android:src="@drawable/ic_login_hero" />
             </RelativeLayout>
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -59,7 +62,7 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_marginTop="@dimen/loginViewsMargin">
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/editTextName"
+                            android:id="@+id/regeditTextName"
                             style="@style/modifiedEditText"
                             android:inputType="textPersonName"
                             android:maxLines="1"
@@ -73,28 +76,26 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_marginTop="@dimen/loginViewsMargin">
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/editTextEmail"
+                            android:id="@+id/regeditTextEmail"
                             style="@style/modifiedEditText"
                             android:inputType="textEmailAddress"
                             android:maxLines="1"
                             android:hint="@string/login_email_hint"/>
                     </com.google.android.material.textfield.TextInputLayout>
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textInputMobile"
+                        android:id="@+id/textInputregno"
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent"
-                        app:endIconTint="@color/purple_200"
-                        app:endIconMode="dropdown_menu"
-                        android:hint="Batch"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        app:endIconDrawable="@drawable/ic_baseline_arrow_drop_down_24"                        android:layout_marginTop="@dimen/loginViewsMargin">
-                        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
-                            android:id="@+id/editTextBatch"
+                        android:layout_marginTop="@dimen/loginViewsMargin">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/regeditTextRegno"
                             style="@style/modifiedEditText"
                             android:maxLines="1"
+                            android:hint="Register number"
+                            android:paddingStart="12dp"
                             />
                     </com.google.android.material.textfield.TextInputLayout>
-
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/textInputPassword"
                         android:layout_height="wrap_content"
@@ -102,11 +103,42 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_marginTop="@dimen/loginViewsMargin">
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/editTextPassword"
+                            android:id="@+id/regeditTextPassword"
                             style="@style/modifiedEditText"
                             android:hint="@string/login_password_hint"
                             android:maxLines="1"
                             android:inputType="textPassword"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputMobile"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        app:endIconTint="@color/purple_200"
+                        app:endIconMode="dropdown_menu"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        app:endIconDrawable="@drawable/ic_baseline_arrow_drop_down_24"                        android:layout_marginTop="@dimen/loginViewsMargin">
+                        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                            android:id="@+id/editTextBatch"
+                            style="@style/modifiedEditText"
+                            android:maxLines="1"
+                            android:hint="Batch"
+                            android:paddingStart="12dp"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputSemester"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        app:endIconTint="@color/purple_200"
+                        app:endIconMode="dropdown_menu"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        app:endIconDrawable="@drawable/ic_baseline_arrow_drop_down_24"                        android:layout_marginTop="@dimen/loginViewsMargin">
+                        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                            android:id="@+id/regeditTextSem"
+                            style="@style/modifiedEditText"
+                            android:hint="Semester"
+                            android:paddingStart="12dp"                            android:maxLines="1"
+                            />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
@@ -115,6 +147,7 @@
                         app:spinning_bar_width="4dp"
                         app:spinning_bar_color="#FFF"
                         android:text="Register"
+                        android:onClick="onRegisterClick"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/loginViewsMargin"
                         app:initialCornerAngle="27dp"
@@ -132,7 +165,7 @@
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
-
+            </ScrollView>
 
 
 

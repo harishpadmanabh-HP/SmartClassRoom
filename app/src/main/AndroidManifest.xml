@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartClassRoom"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.StudentHome">
+        <activity android:name=".ui.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.Register" />
-        <activity android:name=".ui.Login">
+        <activity android:name=".ui.StudentHome">
 
         </activity>
         <activity android:name=".MainActivity"></activity>

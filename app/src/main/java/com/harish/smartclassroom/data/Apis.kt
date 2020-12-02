@@ -2,6 +2,7 @@ package com.harish.smartclassroom.data
 
 import com.harish.smartclassroom.data.models.BatchResponse
 import com.harish.smartclassroom.data.models.LoginResponse
+import com.harish.smartclassroom.data.models.RegistrationResponse
 import com.harish.smartclassroom.util.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -19,6 +20,11 @@ interface Apis {
 
      @GET("student_login.php?")
       fun getLoginStatus(@Query("regno")registerno:String,@Query("password")password:String): Call<LoginResponse>
+
+    //student_reg.php?name=Athira&email=athira@gmail.com&batch=Computer%20Science&semester=S1&password=Athira@123&regno=CS001
+    @GET("student_reg.php?")
+    fun getRegistrationStatus(@Query("name")name:String,@Query("email")email:String,@Query("batch")batch:String,@Query("semester")semester:String,
+     @Query("password")password:String,@Query("regno")regno:String):Call<RegistrationResponse>
 
     companion object {
         operator fun invoke(): Apis {
