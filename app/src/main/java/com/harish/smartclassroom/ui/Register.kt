@@ -21,6 +21,8 @@ class Register : AppCompatActivity() {
     lateinit var viewModel : OnBoardingViewModel
     lateinit var batchList : List<String>
     var selectedBatch : String ?=null
+    val semList:List<String> = listOf("S1","S2","S3","S4","S5","S6","S7","S8")
+    var selectedSem : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,9 +36,9 @@ class Register : AppCompatActivity() {
 
         editTextBatch.setOnItemClickListener { adapterView, view, position, _ ->
             selectedBatch = batchList[position]
-            Toast.makeText(this, selectedBatch, Toast.LENGTH_SHORT).show()
-          //
-
+        }
+        regeditTextSem.setOnItemClickListener{adapterView, view, position, _ ->
+            selectedSem = semList[position]
         }
     }
 
@@ -52,24 +54,18 @@ class Register : AppCompatActivity() {
                 batchList=it.batchDetails.map {
                     it.batchName
                 }
-               setUpBatchDropDown(batchList)
+                setUpBatchDropDown(batchList)
+                setupSemDropDown()
             })
             events.observe(this@Register, Observer {
                 Toast.makeText(this@Register, it, Toast.LENGTH_SHORT).show()
             })
+            registrationstatus.observe(this@Register, Observer {
+                Toast.makeText(this@Register,it.status, Toast.LENGTH_SHORT).show()
+            })
         }
 
     }
-fun setupRegistrationObservers(){
-    viewModel.apply {
-        registrationstatus.observe(this@Register, Observer {
-            Toast.makeText(this@Register,it.status, Toast.LENGTH_SHORT).show()
-        })
-        events.observe(this@Register, Observer {
-            Toast.makeText(this@Register,it, Toast.LENGTH_SHORT).show()
-        })
-    }
-}
     fun setUpBatchDropDown(batchList:List<String>){
         val d_adapter  = ArrayAdapter(
             this@Register,
@@ -83,41 +79,37 @@ fun setupRegistrationObservers(){
         editTextBatch.setTextColor(Color.BLACK)
     }
 
-    fun signupClick(view: View) {
+    fun setupSemDropDown(){
+        val d_adapter  = ArrayAdapter(
+                this@Register,
+                android.R.layout.select_dialog_item,
+                semList
+        )
+        regeditTextSem.setThreshold(1) //will start working from first character
+
+        regeditTextSem.setAdapter(d_adapter) //setting the adapter data into the AutoCompleteTextView
+
+        regeditTextSem.setTextColor(Color.BLACK)
+    }
+
+    fun onRegisterClick(view: View) {
         var name=regeditTextName.text.toString()
         var email=regeditTextEmail.text.toString()
-        var semester="S"+regeditTextSem.text.toString()
         var password=regeditTextPassword.text.toString()
         var regno=regeditTextRegno.text.toString()
 
-        if(name.isNullOrEmpty())
-        {
-            Toast.makeText(this, "Name is empty", Toast.LENGTH_SHORT).show()
+        if(name.isNullOrEmpty() ||
+                email.isNullOrEmpty() ||
+                selectedBatch.isNullOrEmpty()||
+                selectedSem.isNullOrEmpty()||
+                password.isNullOrEmpty()||
+                regno.isNullOrEmpty()
+                ){
+            Toast.makeText(this, "Please Enter All fields", Toast.LENGTH_SHORT).show()
+        }else{
+            viewModel.getRegistrationStatus(name,email, selectedBatch!!, selectedSem!!,password,regno)
         }
-        else if(email.isNullOrEmpty())
-        {
-            Toast.makeText(this, "Email is empty", Toast.LENGTH_SHORT).show()
-        }
-        else if(selectedBatch.isNullOrEmpty())
-        {
-            Toast.makeText(this, "Select Batch", Toast.LENGTH_SHORT).show()
-        }
-        else if(semester.isNullOrEmpty())
-        {
-            Toast.makeText(this, "Select semester", Toast.LENGTH_SHORT).show()
-        }
-        else if(password.isNullOrEmpty())
-      {
-          Toast.makeText(this, "Enter password", Toast.LENGTH_SHORT).show()
-}
-        else if(regno.isNullOrEmpty())
-        {
-            Toast.makeText(this, "Enter regno", Toast.LENGTH_SHORT).show()
-        }
-        else
-        {
-            viewModel.getRegistrationStatus(name,email, selectedBatch.toString(), semester, password, regno)
-        }
+
     }
 
 

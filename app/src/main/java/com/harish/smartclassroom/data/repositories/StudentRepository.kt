@@ -57,15 +57,15 @@ private   val api = Apis()
     }
     fun getRegistrationStatus(name:String,email:String,batch:String,semester:String,password:String,regno:String,onResponse: (status: Boolean, message: String?, response: RegistrationResponse?) -> Unit)
     {
-  api.getRegistrationStatus(name, email, batch, semester, password, regno).enqueue(object:Callback<RegistrationResponse>
-  {
-      override fun onFailure(call: Call<RegistrationResponse>, t: Throwable) {
-          if(!Utils.hasInternetConnection(context.applicationContext)){
-              onResponse(false,context.getString(R.string.offline),null)
-          }else{
+       api.getRegistrationStatus(name, email, batch, semester, password, regno).enqueue(object:Callback<RegistrationResponse>
+        {
+            override fun onFailure(call: Call<RegistrationResponse>, t: Throwable) {
+              if(!Utils.hasInternetConnection(context.applicationContext)){
+                onResponse(false,context.getString(R.string.offline),null)
+              }else{
               onResponse(false,context.getString(R.string.server_error),null)
-          }
-      }
+              }
+        }
 
       override fun onResponse(call: Call<RegistrationResponse>, response: Response<RegistrationResponse>) {
           if(response.isSuccessful){
@@ -74,8 +74,8 @@ private   val api = Apis()
               onResponse(false,context.getString(R.string.server_error),null)
           }
       }
-  }
-  )
+    })
+ }
 
-}
+
 }
