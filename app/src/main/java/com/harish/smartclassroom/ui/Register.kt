@@ -77,8 +77,10 @@ class Register : AppCompatActivity() {
 
                 if(it.status.equals("success")){
                     appData.setLoggedin(true)
+                    pb_load.visibility = View.INVISIBLE
                     startActivity(Intent(this@Register,StudentHome::class.java))
                 }else{
+                    pb_load.visibility = View.INVISIBLE
                     Snackbar.make(rl_root,"Registration failed", Snackbar.LENGTH_LONG).show()
                 }
 
@@ -113,6 +115,7 @@ class Register : AppCompatActivity() {
     }
 
     fun onRegisterClick(view: View) {
+        pb_load.visibility = View.VISIBLE
         var name=regeditTextName.text.toString()
         var email=regeditTextEmail.text.toString()
         var password=regeditTextPassword.text.toString()
@@ -125,6 +128,7 @@ class Register : AppCompatActivity() {
                 password.isNullOrEmpty()||
                 regno.isNullOrEmpty()
                 ){
+            pb_load.visibility = View.INVISIBLE
             Toast.makeText(this, "Please Enter All fields", Toast.LENGTH_SHORT).show()
         }else{
             viewModel.getRegistrationStatus(name,email, selectedBatch!!, selectedSem!!,password,regno)

@@ -142,6 +142,12 @@
                             />
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <FrameLayout
+                        android:layout_marginTop="20dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
                     <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
                         android:id="@+id/cirRegisterButton"
                         style="@style/loginButton"
@@ -149,11 +155,22 @@
                         app:spinning_bar_color="#FFF"
                         android:text="Register"
                         android:onClick="onRegisterClick"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/loginViewsMargin"
                         app:initialCornerAngle="27dp"
                         app:spinning_bar_padding="6dp"/>
 
+                        <ProgressBar
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:id="@+id/pb_load"
+                            android:visibility="invisible"
+                            android:elevation="10dp"
+                            android:layout_gravity="end"
+                            android:indeterminateTint="@color/white"/>
+
+
+                    </FrameLayout>
                     <TextView
                         style="@style/parent"
                         android:textAlignment="center"
