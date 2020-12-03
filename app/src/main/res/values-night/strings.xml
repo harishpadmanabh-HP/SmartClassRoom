@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="quiz_onboarding_next_question">Swipe to get next question</string>
+    <string name="got_it">GOT  IT</string>
+</resources>

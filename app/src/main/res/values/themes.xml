@@ -49,5 +49,18 @@
         <item name="android:textColor">@color/teal_200</item>
         <item name="android:paddingLeft">5dp</item>
     </style>
+    <style name="Text_OnBoarding_Track_Selection_Sub_Title">
+        <item name="android:fontFamily">@font/roboto_thin</item>
+        <item name="android:letterSpacing">0.01</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:gravity">left</item>
+        <item name="android:layout_marginLeft">24dp</item>
+        <item name="android:layout_marginRight">24dp</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDx" tools:ignore="DuplicateDefinition">1</item>
+        <item name="android:shadowRadius">4</item>
+        <item name="android:shadowColor">@color/green</item>
+
+    </style>
 
 </resources>

@@ -7,6 +7,16 @@
     android:background="@color/alabaster"
     tools:context=".ui.QuizActivity">
 
+    <LinearLayout
+        android:id="@+id/ll_onboarding"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></LinearLayout>
+
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"

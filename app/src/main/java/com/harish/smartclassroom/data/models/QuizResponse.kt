@@ -24,7 +24,10 @@ data class QuizResponse(
         val d: String,
         @SerializedName("question")
         val question: String
-    )
+    ){
+        var isAnswered = false
+
+    }
 
     data class QuizDetail(
         @SerializedName("batch_id")
