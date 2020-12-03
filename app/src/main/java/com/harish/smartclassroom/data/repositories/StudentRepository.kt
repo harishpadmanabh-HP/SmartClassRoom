@@ -4,14 +4,12 @@ import android.app.Application
 import android.content.Context
 import com.harish.smartclassroom.R
 import com.harish.smartclassroom.data.Apis
-import com.harish.smartclassroom.data.models.AssignmentListResponse
-import com.harish.smartclassroom.data.models.BatchResponse
-import com.harish.smartclassroom.data.models.LoginResponse
-import com.harish.smartclassroom.data.models.RegistrationResponse
+import com.harish.smartclassroom.data.models.*
 import com.harish.smartclassroom.util.Utils
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.security.auth.Subject
 
 class StudentRepository(val context: Application) {
 
@@ -98,8 +96,51 @@ private   val api = Apis()
                 }
             }
         })
+    }
+
+    fun getNotes(semester: String ,
+                 batchId: String,
+                 subject: String,
+                 onResponse: (status: Boolean, message: String?, response: NotesResponse?) -> Unit
+                 ){
+        api.getNotesList(semester,batchId,subject).enqueue(object : Callback<NotesResponse>{
+            override fun onFailure(call: Call<NotesResponse>, t: Throwable) {
+                if(!Utils.hasInternetConnection(context.applicationContext)){
+                    onResponse(false,context.getString(R.string.offline),null)
+                }else{
+                    onResponse(false,context.getString(R.string.server_error),null)
+                }
+            }
+
+            override fun onResponse(call: Call<NotesResponse>, response: Response<NotesResponse>) {
+                if(response.isSuccessful){
+                    onResponse(true,"",response.body())
+                }else{
+                    onResponse(false,context.getString(R.string.server_error),null)
+                }
+            }
+        })
+    }
 
 
+    fun getQuiz(examId : String, onResponse: (status: Boolean, message: String?, response: QuizResponse?) -> Unit){
+        api.getQuiz(examId).enqueue(object : Callback<QuizResponse>{
+            override fun onFailure(call: Call<QuizResponse>, t: Throwable) {
+                if(!Utils.hasInternetConnection(context.applicationContext)){
+                    onResponse(false,context.getString(R.string.offline),null)
+                }else{
+                    onResponse(false,context.getString(R.string.server_error),null)
+                }
+            }
+
+            override fun onResponse(call: Call<QuizResponse>, response: Response<QuizResponse>) {
+                if(response.isSuccessful){
+                    onResponse(true,"",response.body())
+                }else{
+                    onResponse(false,context.getString(R.string.server_error),null)
+                }
+            }
+        })
     }
 
 

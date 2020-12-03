@@ -78,7 +78,7 @@ class Register : AppCompatActivity() {
                 if(it.status.equals("success")){
                     appData.setLoggedin(true)
                     pb_load.visibility = View.INVISIBLE
-                    startActivity(Intent(this@Register,StudentHome::class.java))
+                    startActivity(Intent(this@Register,Login::class.java))
                 }else{
                     pb_load.visibility = View.INVISIBLE
                     Snackbar.make(rl_root,"Registration failed", Snackbar.LENGTH_LONG).show()

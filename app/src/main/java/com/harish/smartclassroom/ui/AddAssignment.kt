@@ -70,6 +70,8 @@ class AddAssignment : AppCompatActivity() {
             val outputStream = FileOutputStream(file)
             inputStream.copyTo(outputStream)
 
+            Log.e("file ",file.name)
+
 
 
             uploadPDF(file)
@@ -82,7 +84,7 @@ class AddAssignment : AppCompatActivity() {
                 val batchid = RequestBody.create("text/plain".toMediaTypeOrNull(),"1")
                 val assign_id = RequestBody.create("text/plain".toMediaTypeOrNull(),"1")
                 val semester = RequestBody.create("text/plain".toMediaTypeOrNull(),"S1")
-                val stud_id = RequestBody.create("text/plain".toMediaTypeOrNull(),"6")
+                val stud_id = RequestBody.create("text/plain".toMediaTypeOrNull(),"8")
                 val faculty_id = RequestBody.create("text/plain".toMediaTypeOrNull(),"1")
                 val subject = RequestBody.create("text/plain".toMediaTypeOrNull(),"blabla")
                 val requestFile = RequestBody.create("image/jpeg".toMediaTypeOrNull(), selectedFile)

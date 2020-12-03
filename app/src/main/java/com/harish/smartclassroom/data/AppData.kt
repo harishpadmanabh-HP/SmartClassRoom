@@ -2,6 +2,8 @@ package com.harish.smartclassroom.data
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.google.gson.Gson
+import com.harish.smartclassroom.data.models.LoginResponse
 import java.util.concurrent.TimeUnit
 
 object AppData {
@@ -54,6 +56,20 @@ object AppData {
             status = it.getBoolean("loggedin",false)
         }
         return status
+    }
+
+    fun setStudentDict(data:LoginResponse.StudentData){
+        val editor = preferences?.edit()
+        editor?.putString("studentdict", Gson().toJson(data) )
+        editor?.apply()
+    }
+
+    fun getStudentDict():LoginResponse.StudentData?{
+        var studentData : LoginResponse.StudentData? = null
+        preferences?.let {
+            studentData = Gson().fromJson(it.getString("studentdict",""),LoginResponse.StudentData::class.java)
+        }
+        return studentData
     }
 
 }

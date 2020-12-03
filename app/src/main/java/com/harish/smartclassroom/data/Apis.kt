@@ -11,6 +11,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 import java.util.concurrent.TimeUnit
+import javax.security.auth.Subject
 
 
 interface Apis {
@@ -47,16 +48,26 @@ interface Apis {
                       ):Call<AddAssignmentResponse>
 
 
+    @GET("view_note.php?")
+    fun getNotesList(@Query("semester") semester: String,
+                     @Query("batch_id") batchID: String,
+                     @Query("subject") subject: String
+                     ):Call<NotesResponse>
+
+    @GET("view_quiz.php?")
+    fun getQuiz(@Query("exam_id") exam_id : String):Call<QuizResponse>
+
+
     companion object {
         operator fun invoke(): Apis {
-            var logger = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC)
+            var logger = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
             val client: OkHttpClient =
                     OkHttpClient.Builder().addInterceptor(logger).build()
 
             val okHttpClient = OkHttpClient().newBuilder()
-                .connectTimeout(60, TimeUnit.SECONDS)
-                .readTimeout(60, TimeUnit.SECONDS)
-                .writeTimeout(60, TimeUnit.SECONDS)
+                .connectTimeout(180, TimeUnit.SECONDS)
+                .readTimeout(180, TimeUnit.SECONDS)
+                .writeTimeout(180, TimeUnit.SECONDS)
                 .build()
 
 

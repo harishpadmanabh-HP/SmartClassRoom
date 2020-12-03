@@ -51,8 +51,7 @@ class Login : AppCompatActivity() {
         viewModel.loginstatus.observe(this@Login, Observer {
 
             if(it.status.equals("Success")){
-                appData.setSemester(it.Student_data.semester)
-                appData.setBatchId(it.Student_data.batch_id)
+                appData.setStudentDict(it.Student_data)
                 appData.setLoggedin(true)
                 startActivity(Intent(this@Login,StudentHome::class.java))
             }else{
