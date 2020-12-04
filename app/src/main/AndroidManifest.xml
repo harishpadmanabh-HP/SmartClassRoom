@@ -16,7 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartClassRoom"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MainActivity">
+
+        <activity android:name=".ui.StartQuiz">
+
+        </activity>
+        <activity android:name=".ui.QuizActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,14 +31,31 @@
         <activity android:name=".ui.AddAssignment" />
         <activity android:name=".ui.Login" />
         <activity android:name=".ui.Register" />
-        <activity android:name=".ui.StudentHome">
 
-        </activity>
-        <activity android:name=".ui.QuizActivity" />
+        <activity android:name=".ui.StudentHome"></activity>
+        <activity android:name=".MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+
+        <receiver
+            android:name=".ui.timer.TimerExpiredReceiver"
+            android:enabled="true"
+            android:exported="false" />
+        <receiver
+            android:name=".ui.timer.TimerNotificationActionReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="stop" />
+                <action android:name="pause" />
+                <action android:name="resume" />
+                <action android:name="start" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>
