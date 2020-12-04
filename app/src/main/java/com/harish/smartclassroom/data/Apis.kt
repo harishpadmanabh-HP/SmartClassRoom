@@ -65,9 +65,9 @@ interface Apis {
                     OkHttpClient.Builder().addInterceptor(logger).build()
 
             val okHttpClient = OkHttpClient().newBuilder()
-                .connectTimeout(180, TimeUnit.SECONDS)
-                .readTimeout(180, TimeUnit.SECONDS)
-                .writeTimeout(180, TimeUnit.SECONDS)
+                .connectTimeout(300, TimeUnit.SECONDS)
+                .readTimeout(300, TimeUnit.SECONDS)
+                .writeTimeout(300, TimeUnit.SECONDS)
                 .build()
 
 
