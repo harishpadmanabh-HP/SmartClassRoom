@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartClassRoom"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.QuizActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,7 +30,7 @@
         <activity android:name=".ui.StudentHome">
 
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".ui.QuizActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
