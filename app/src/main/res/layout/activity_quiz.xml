@@ -7,6 +7,22 @@
     android:background="@color/alabaster"
     tools:context=".ui.QuizActivity">
 
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:text="SUBMIT"
+        android:onClick="onQuizFinished"
+        android:fontFamily="@font/roboto_thin"
+        app:icon="@drawable/ic_baseline_done_24"
+        app:iconTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_more" />
+
     <LinearLayout
         android:id="@+id/ll_onboarding"
         android:layout_width="1dp"
@@ -53,5 +69,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/textView5" >
+
+    </androidx.viewpager2.widget.ViewPager2>
 </androidx.constraintlayout.widget.ConstraintLayout>

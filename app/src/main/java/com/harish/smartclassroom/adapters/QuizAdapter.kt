@@ -37,6 +37,7 @@ class QuizAdapter (val listener : QuizListener): RecyclerView.Adapter<QuizAdapte
 
         holder.itemView.apply {
             listener.onQuizShown(position,currentQuiz)
+            tv_qno . text = (position+1).toString()
             tv_question . text = currentQuiz.question
             tv_a . text = currentQuiz.a
             tv_b . text = currentQuiz.b
