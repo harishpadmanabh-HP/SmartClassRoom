@@ -18,9 +18,9 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".ui.QuizResult"/>
 
-        <activity android:name=".ui.StartQuiz">
+        <activity android:name=".ui.StartQuiz"/>
 
-        </activity>
+
 
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".ui.Viewnotes" />
@@ -31,6 +31,7 @@
         <activity android:name=".ui.Register" />
         <activity android:name=".ui.StudentHome"></activity>
         <activity android:name=".ui.QuizActivity" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
