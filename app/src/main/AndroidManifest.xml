@@ -16,21 +16,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartClassRoom"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.QuizResult">
+
+        </activity>
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".ui.Viewnotes" />
+        <activity android:name=".ui.AddAssignment">
+
+        </activity>
+        <activity android:name=".ui.Login" />
+        <activity android:name=".ui.Register" />
+        <activity android:name=".ui.StudentHome"></activity>
+        <activity android:name=".ui.QuizActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.Viewnotes" />
-        <activity android:name=".ui.AddAssignment" />
-        <activity android:name=".ui.Login" />
-        <activity android:name=".ui.Register" />
-        <activity android:name=".ui.StudentHome">
-
-        </activity>
-        <activity android:name=".ui.QuizActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

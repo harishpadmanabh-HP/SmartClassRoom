@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.harish.smartclassroom.R
 import com.harish.smartclassroom.data.Apis
+import com.harish.smartclassroom.data.AppData
 import com.harish.smartclassroom.data.models.AddAssignmentResponse
 import com.harish.smartclassroom.extensions.getFileName
 import kotlinx.android.synthetic.main.activity_add_assignment.*
@@ -27,6 +28,24 @@ import java.io.FileOutputStream
 class AddAssignment : AppCompatActivity() {
 
     var selectedFile : File?=null
+    val batchId by lazy {
+        intent.getStringExtra("BATCH_ID")
+    }
+    val assignmentID by lazy {
+        intent.getStringExtra("ASSGN_ID")
+    }
+    val subject_ by lazy {
+        intent.getStringExtra("SUBJECT")
+    }
+    val sem by lazy {
+        intent.getStringExtra("SEM")
+    }
+    val facultyId by lazy {
+        intent.getStringExtra("FACULTY_ID")
+    }
+    val studentID by lazy {
+        AppData.init(this).getStudentDict()?.stud_id
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,13 +100,23 @@ class AddAssignment : AppCompatActivity() {
     private fun uploadPDF(selectedFile: File?) {
 
         if(selectedFile != null){
-                val batchid = RequestBody.create("text/plain".toMediaTypeOrNull(),"1")
-                val assign_id = RequestBody.create("text/plain".toMediaTypeOrNull(),"1")
-                val semester = RequestBody.create("text/plain".toMediaTypeOrNull(),"S1")
-                val stud_id = RequestBody.create("text/plain".toMediaTypeOrNull(),"8")
-                val faculty_id = RequestBody.create("text/plain".toMediaTypeOrNull(),"1")
-                val subject = RequestBody.create("text/plain".toMediaTypeOrNull(),"blabla")
-                val requestFile = RequestBody.create("image/jpeg".toMediaTypeOrNull(), selectedFile)
+
+            val batchid = RequestBody.create("text/plain".toMediaTypeOrNull(),batchId!!)
+            val assign_id = RequestBody.create("text/plain".toMediaTypeOrNull(),assignmentID!!)
+            val semester = RequestBody.create("text/plain".toMediaTypeOrNull(),sem!!)
+            val stud_id = RequestBody.create("text/plain".toMediaTypeOrNull(),studentID!!)
+            val faculty_id = RequestBody.create("text/plain".toMediaTypeOrNull(),facultyId!!)
+            val subject = RequestBody.create("text/plain".toMediaTypeOrNull(),subject_!!)
+            val requestFile = RequestBody.create("image/jpeg".toMediaTypeOrNull(), selectedFile)
+
+
+//                val batchid = RequestBody.create("text/plain".toMediaTypeOrNull(),"1")
+//                val assign_id = RequestBody.create("text/plain".toMediaTypeOrNull(),"1")
+//                val semester = RequestBody.create("text/plain".toMediaTypeOrNull(),"S1")
+//                val stud_id = RequestBody.create("text/plain".toMediaTypeOrNull(),"13")
+//                val faculty_id = RequestBody.create("text/plain".toMediaTypeOrNull(),"1")
+//                val subject = RequestBody.create("text/plain".toMediaTypeOrNull(),"blabla")
+//                val requestFile = RequestBody.create("image/jpeg".toMediaTypeOrNull(), selectedFile)
                 val filePart =
                     MultipartBody.Part.createFormData("avatar", selectedFile.name, requestFile)
 

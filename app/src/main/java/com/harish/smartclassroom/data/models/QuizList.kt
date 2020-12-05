@@ -23,6 +23,9 @@ data class QuizList(
         @SerializedName("subject")
         val subject: String,
         @SerializedName("title")
-        val title: String
+        val title: String,
+        @SerializedName("examtime")
+        val duration :  Int
+
     )
 }

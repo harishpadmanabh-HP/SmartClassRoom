@@ -1,5 +1,6 @@
 package com.harish.smartclassroom.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -25,6 +26,9 @@ class QuizActivity : AppCompatActivity(),QuizListener {
     var correctAnswered = 0
     val answeredQuestions:MutableList<Map<Int,QuizAnswers>> = mutableListOf()
     var isAnswered = false
+    lateinit var quizTitle : String
+    var wrongAnswered = 0
+    var totalQuestions = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +51,8 @@ class QuizActivity : AppCompatActivity(),QuizListener {
 
             quiz.observe(this@QuizActivity, Observer {quizResponse->
 
+                quizTitle = quizResponse.quizDetails[0].examTitle
+                totalQuestions = (quizResponse.question.size)+1
                 if(!quizResponse?.question.isNullOrEmpty()){
                     mAdapter.setQuizList(quizResponse.question)
                     vp_quizCard.adapter = mAdapter
@@ -133,6 +139,8 @@ class QuizActivity : AppCompatActivity(),QuizListener {
                            val attemptedAnswer = it.getValue(index)
                              if(compareAnswer(correctAnswer,attemptedAnswer))
                                  correctAnswered+=1
+                              else
+                                 wrongAnswered+=1
                        }
                    }
                }
@@ -141,7 +149,17 @@ class QuizActivity : AppCompatActivity(),QuizListener {
 
         }
 
-        Toast.makeText(this, "Correct Answer = $correctAnswered", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this@QuizActivity,QuizResult::class.java)
+        intent.putExtra("total_Questions",totalQuestions)
+        intent.putExtra("correct",correctAnswered)
+        intent.putExtra("wrong",wrongAnswered)
+        intent.putExtra("exam_name",quizTitle)
+
+        startActivity(intent)
+
+
+
+//        Toast.makeText(this, "Correct Answer = $correctAnswered", Toast.LENGTH_SHORT).show()
 
 
     }
