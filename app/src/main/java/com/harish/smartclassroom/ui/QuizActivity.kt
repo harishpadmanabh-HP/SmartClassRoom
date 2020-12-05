@@ -13,6 +13,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.github.florent37.viewtooltip.ViewTooltip
 import com.harish.smartclassroom.R
 import com.harish.smartclassroom.adapters.QuizAdapter
 import com.harish.smartclassroom.adapters.QuizAnswers
@@ -46,6 +47,9 @@ class QuizActivity : AppCompatActivity(),QuizListener {
 
     private var secondsRemaining: Long = 0
 
+    val examid by lazy { intent.getStringExtra("examId") }
+    val duration by lazy { intent.getIntExtra("duration",0) }
+    var examTitle = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,8 +58,9 @@ class QuizActivity : AppCompatActivity(),QuizListener {
         val viewModelFactory = HomeViewModelFactory(application)
         viewModel = ViewModelProvider(this,viewModelFactory).get(HomeViewModel::class.java)
         appData = AppData.init(this)
+        PrefUtil.setTimerLength(this,duration)
         setupObserver()
-        viewModel.getQuiz("1")
+        viewModel.getQuiz(examid!!)
         //showOnboarding()
         initTimer()
         startTimer()
@@ -73,6 +78,7 @@ class QuizActivity : AppCompatActivity(),QuizListener {
 
                 quizTitle = quizResponse.quizDetails[0].examTitle
                 totalQuestions = (quizResponse.question.size)+1
+                examTitle = quizResponse.quizDetails[0].examTitle
                 if(!quizResponse?.question.isNullOrEmpty()){
                     mAdapter.setQuizList(quizResponse.question)
                     vp_quizCard.adapter = mAdapter
@@ -267,7 +273,7 @@ class QuizActivity : AppCompatActivity(),QuizListener {
         super.onResume()
 
         initTimer()
-
+        showTooltip()
         removeAlarm(this)
         NotificationUtil.hideTimerNotification(this)
     }
@@ -315,6 +321,20 @@ class QuizActivity : AppCompatActivity(),QuizListener {
 
         //updateButtons()
         updateCountdownUI()
+    }
+
+    fun showTooltip(){
+     val tooltip=   ViewTooltip.on(fab_submit)
+            .text("Click here to submit only after answering all questions.Swipe left or right to get previous and next question.")
+            .position(ViewTooltip.Position.TOP)
+            .color(R.color.black)
+            .clickToHide(true)
+            .autoHide(true,5000)
+            .textColor(R.color.white)
+            .corner(10)
+            .arrowWidth(15)
+            .arrowHeight(15)
+            .show()
     }
 
 

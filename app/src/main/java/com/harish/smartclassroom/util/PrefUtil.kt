@@ -13,6 +13,12 @@ class PrefUtil {
             val preferences = PreferenceManager.getDefaultSharedPreferences(context)
             return preferences.getInt(TIMER_LENGTH_ID, 20)
         }
+        fun setTimerLength(context: Context,duration :Int){
+            val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+            val editor = preferences.edit()
+            editor.putInt(TIMER_LENGTH_ID,duration)
+            editor.apply()
+        }
 
         private const val PREVIOUS_TIMER_LENGTH_SECONDS_ID = "com.resocoder.timer.previous_timer_length_seconds"
 

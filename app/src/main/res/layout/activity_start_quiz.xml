@@ -228,6 +228,7 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/quiz_start_button"
         android:text="START EXAM"
+        android:onClick="onQuizStart"
         app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

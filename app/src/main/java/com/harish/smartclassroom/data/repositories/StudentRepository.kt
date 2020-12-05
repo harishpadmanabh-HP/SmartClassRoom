@@ -143,5 +143,30 @@ private   val api = Apis()
         })
     }
 
+    fun getQuizList(
+        semester: String,
+        batchId: String,
+        subject: String,
+        onResponse: (status: Boolean, message: String?, response: QuizList?) -> Unit
+    ){
+        api.getQuizList(semester, batchId, subject).enqueue(object :Callback<QuizList>{
+            override fun onFailure(call: Call<QuizList>, t: Throwable) {
+                if(!Utils.hasInternetConnection(context.applicationContext)){
+                    onResponse(false,context.getString(R.string.offline),null)
+                }else{
+                    onResponse(false,context.getString(R.string.server_error),null)
+                }
+            }
+
+            override fun onResponse(call: Call<QuizList>, response: Response<QuizList>) {
+                if(response.isSuccessful){
+                    onResponse(true,"",response.body())
+                }else{
+                    onResponse(false,context.getString(R.string.server_error),null)
+                }
+            }
+        })
+    }
+
 
 }

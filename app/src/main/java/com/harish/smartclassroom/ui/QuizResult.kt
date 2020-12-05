@@ -1,5 +1,6 @@
 package com.harish.smartclassroom.ui
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,14 +16,22 @@ class QuizResult : AppCompatActivity() {
 
     val wrongAnswers by lazy { intent.getIntExtra("wrong",0) }
     val totalQuestions by lazy{ intent.getIntExtra("total_Questions",0)}
+    val examName by lazy { intent.getStringExtra("exam_name") }
     var notAnswered = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz_result)
 
+        exam .text = examName
+
+
         notAnswered = totalQuestions - (correctAnswers+wrongAnswers)
 
+        setupChart()
 
+        }
+
+    private fun setupChart() {
         val section1 = DonutSection(
             name = "Correct",
             color = Color.parseColor("#95C730"),
@@ -37,12 +46,21 @@ class QuizResult : AppCompatActivity() {
 
         val section3 = DonutSection(
             name = "Not Answered",
-            color = Color.parseColor("#F1A1BA"),
+            color = Color.parseColor("#6C5DD3"),
             amount = notAnswered.toFloat()
         )
 
         donut_view.cap = totalQuestions.toFloat()
         donut_view.animationDurationMs = 3000
+
         donut_view.submitData(listOf(section1, section2,section3))
+
+        tv_correct.text = correctAnswers.toString()
+        tv_not_answered.text = notAnswered.toString()
+        tv_wrong.text=wrongAnswers.toString()
+    }
+
+    override fun onBackPressed() {
+        startActivity(Intent(this@QuizResult,StudentHome::class.java))
     }
 }

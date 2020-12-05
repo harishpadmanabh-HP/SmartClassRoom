@@ -57,6 +57,12 @@ interface Apis {
     @GET("view_quiz.php?")
     fun getQuiz(@Query("exam_id") exam_id : String):Call<QuizResponse>
 
+    @GET("view_exam_date.php?")
+    fun getQuizList(@Query("semester") semester:String,
+                    @Query("batch_id") batchId:String,
+                    @Query("subject") subject:String
+                    ):Call<QuizList>
+
 
     companion object {
         operator fun invoke(): Apis {

@@ -2,6 +2,8 @@ package com.harish.smartclassroom.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
 import com.harish.smartclassroom.R
@@ -16,7 +18,27 @@ class Viewnotes : AppCompatActivity() {
         setContentView(R.layout.activity_viewnotes)
 
         val url = intent.getStringExtra("NOTES_URL")
-        wv_notes.webViewClient = WebViewClient()
+        wv_notes.webViewClient = object : WebViewClient(){
+            override fun onPageFinished(view: WebView?, url: String?) {
+                super.onPageFinished(view, url)
+                wv_notes.visibility = View.VISIBLE
+                cl_load.visibility = View.GONE
+
+            }
+
+
+
+            override fun onReceivedError(
+                view: WebView?,
+                errorCode: Int,
+                description: String?,
+                failingUrl: String?
+            ) {
+                super.onReceivedError(view, errorCode, description, failingUrl)
+
+                Toast.makeText(this@Viewnotes, description, Toast.LENGTH_SHORT).show()
+            }
+        }
 
        if(!url.isNullOrEmpty())
         wv_notes.loadUrl(WEBVIEW_PREFIX+url)

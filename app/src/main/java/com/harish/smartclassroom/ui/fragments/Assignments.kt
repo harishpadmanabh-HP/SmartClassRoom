@@ -37,6 +37,8 @@ class Assignments : Fragment() {
         appData = AppData.init(requireContext())
          if(!appData.getStudentDict()?.semester.isNullOrEmpty()&& !appData.getStudentDict()?.batch_id.isNullOrEmpty()) {
              viewModel.getAssignments(appData.getStudentDict()!!.semester, appData.getStudentDict()!!.batch_id)
+         }else{
+             hideShimmerEffect()
          }
         showShimmerEffect()
      //   setupObservers()

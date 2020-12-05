@@ -26,6 +26,7 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             android:padding="20dp"
+            android:id="@+id/exam"
             android:layout_marginStart="16dp"
             android:fontFamily="@font/noto_sans"
             android:layout_gravity="center"
@@ -243,10 +244,10 @@
                     android:layout_height="150dp"
                     android:layout_margin="8dp"
                     android:layout_marginStart="16dp"
-                    app:donut_bgLineColor="@color/dullblue"
+                    app:donut_bgLineColor="@color/cream"
                     app:donut_gapAngle="270"
-                    app:donut_gapWidth="20"
-                    app:donut_strokeWidth="16dp"
+                    app:donut_gapWidth="50"
+                    app:donut_strokeWidth="36dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
