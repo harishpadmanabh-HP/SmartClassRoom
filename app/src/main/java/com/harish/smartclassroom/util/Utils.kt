@@ -1,11 +1,9 @@
 package com.harish.smartclassroom.util
 
-import android.app.Application
 import android.content.Context
 import android.content.Context.CONNECTIVITY_SERVICE
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import androidx.core.content.ContextCompat.getSystemService
 
 class Utils {
 
@@ -24,6 +22,10 @@ class Utils {
              capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
              else -> false
          }
+     }
+
+     fun convertDpToPx(context: Context, dp: Int): Float {
+         return dp * context.resources.displayMetrics.density
      }
  }
 

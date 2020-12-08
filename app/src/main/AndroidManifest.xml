@@ -16,15 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartClassRoom"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.QuizResult"/>
-
-        <activity android:name=".ui.StartQuiz">
-
-
-        </activity>
-
-
-
+        <activity android:name=".ui.walkthrough.Walkthrough"
+            android:theme="@style/Theme.Walk"
+            ></activity>
+        <activity android:name=".ui.QuizResult" />
+        <activity android:name=".ui.StartQuiz"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,21 +29,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.Viewnotes" />
-        <activity android:name=".ui.AddAssignment">
-
-        </activity>
+        <activity android:name=".ui.AddAssignment"></activity>
         <activity android:name=".ui.Login" />
         <activity android:name=".ui.Register" />
-        <activity android:name=".ui.StudentHome"></activity>
-        <activity android:name=".ui.QuizActivity" >
-
-        </activity>
-
+        <activity android:name=".ui.StudentHome" />
+        <activity android:name=".ui.QuizActivity"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
 
         <receiver
             android:name=".ui.timer.TimerExpiredReceiver"
@@ -64,7 +54,6 @@
                 <action android:name="start" />
             </intent-filter>
         </receiver>
-
     </application>
 
 </manifest>
