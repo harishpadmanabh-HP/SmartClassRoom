@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.harish.smartclassroom.data.models.LoginResponse
+import com.harish.smartclassroom.data.models.StudentDetails
 import java.util.concurrent.TimeUnit
 
 object AppData {
@@ -68,6 +69,20 @@ object AppData {
         var studentData : LoginResponse.StudentData? = null
         preferences?.let {
             studentData = Gson().fromJson(it.getString("studentdict",""),LoginResponse.StudentData::class.java)
+        }
+        return studentData
+    }
+
+    fun setStudentDetails(data:StudentDetails){
+        val editor = preferences?.edit()
+        editor?.putString("studentdetails", Gson().toJson(data) )
+        editor?.apply()
+    }
+
+    fun getStudentDetails():StudentDetails?{
+        var studentData : StudentDetails? = null
+        preferences?.let {
+            studentData = Gson().fromJson(it.getString("studentdetails",""),StudentDetails::class.java)
         }
         return studentData
     }

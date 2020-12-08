@@ -4,10 +4,7 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.harish.smartclassroom.data.models.AssignmentListResponse
-import com.harish.smartclassroom.data.models.NotesResponse
-import com.harish.smartclassroom.data.models.QuizList
-import com.harish.smartclassroom.data.models.QuizResponse
+import com.harish.smartclassroom.data.models.*
 import com.harish.smartclassroom.data.repositories.StudentRepository
 
 class HomeViewModel( var application: Application) : ViewModel() {
@@ -18,6 +15,7 @@ class HomeViewModel( var application: Application) : ViewModel() {
     var notes : MutableLiveData<List<NotesResponse.StudyMaterial>> = MutableLiveData()
     val quiz : MutableLiveData<QuizResponse> = MutableLiveData()
     val exams :MutableLiveData<QuizList> = MutableLiveData()
+    val studentDetails : MutableLiveData<StudentDetails> = MutableLiveData()
 
     fun getAssignments(sem:String, batchId : String)= repository.getAssignmentList(sem,batchId,onResponse = {
         status, message, response ->
@@ -47,6 +45,14 @@ class HomeViewModel( var application: Application) : ViewModel() {
             events.postValue(message)
     })
 
+    fun getStudentDetails(studId:String) = repository.getStudentDetails(studId,onResponse = {
+        status, message, response ->
+        if(status)
+            studentDetails.postValue(response)
+        else
+            events.postValue(message)
+
+    })
 
 
 }

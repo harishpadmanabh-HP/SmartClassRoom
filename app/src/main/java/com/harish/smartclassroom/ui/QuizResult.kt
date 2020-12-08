@@ -50,10 +50,10 @@ class QuizResult : AppCompatActivity() {
             amount = notAnswered.toFloat()
         )
 
-        donut_view.cap = totalQuestions.toFloat()
-        donut_view.animationDurationMs = 3000
+        donut_view_exams.cap = totalQuestions.toFloat()
+        donut_view_exams.animationDurationMs = 3000
 
-        donut_view.submitData(listOf(section1, section2,section3))
+        donut_view_exams.submitData(listOf(section1, section2,section3))
 
         tv_correct.text = correctAnswers.toString()
         tv_not_answered.text = notAnswered.toString()

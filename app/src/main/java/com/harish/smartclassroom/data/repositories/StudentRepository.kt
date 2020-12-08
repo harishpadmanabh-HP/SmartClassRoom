@@ -168,5 +168,28 @@ private   val api = Apis()
         })
     }
 
+    fun getStudentDetails(studID:String,onResponse: (status: Boolean, message: String?, response: StudentDetails?) -> Unit){
+        api.getStudentDetails(studID).enqueue(object :Callback<StudentDetails>{
+            override fun onFailure(call: Call<StudentDetails>, t: Throwable) {
+                if(!Utils.hasInternetConnection(context.applicationContext)){
+                    onResponse(false,context.getString(R.string.offline),null)
+                }else{
+                    onResponse(false,context.getString(R.string.server_error),null)
+                }
+            }
+
+            override fun onResponse(
+                call: Call<StudentDetails>,
+                response: Response<StudentDetails>
+            ) {
+                if(response.isSuccessful){
+                    onResponse(true,"",response.body())
+                }else{
+                    onResponse(false,context.getString(R.string.server_error),null)
+                }
+            }
+        })
+    }
+
 
 }

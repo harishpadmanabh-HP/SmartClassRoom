@@ -11,6 +11,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 import java.util.concurrent.TimeUnit
+import javax.annotation.Generated
 import javax.security.auth.Subject
 
 
@@ -62,6 +63,9 @@ interface Apis {
                     @Query("batch_id") batchId:String,
                     @Query("subject") subject:String
                     ):Call<QuizList>
+
+    @GET("student_details_view.php?")
+    fun getStudentDetails(@Query("stud_id") studId : String):Call<StudentDetails>
 
 
     companion object {

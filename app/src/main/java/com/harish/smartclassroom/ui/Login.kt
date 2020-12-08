@@ -13,6 +13,9 @@ import com.harish.smartclassroom.data.AppData
 import com.harish.smartclassroom.viewmodels.OnBoardingViewModel
 import com.harish.smartclassroom.viewmodels.OnbaordingViewModelFactory
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class Login : AppCompatActivity() {
 
@@ -53,6 +56,8 @@ class Login : AppCompatActivity() {
             if(it.status.equals("Success")){
                 appData.setStudentDict(it.Student_data)
                 appData.setLoggedin(true)
+
+
                 startActivity(Intent(this@Login,StudentHome::class.java))
             }else{
                 Snackbar.make(rl_root,"Login failed",Snackbar.LENGTH_LONG).show()

@@ -7,125 +7,345 @@
 
         <variable
             name="studentDict"
-            type="com.harish.smartclassroom.data.models.LoginResponse.StudentData" />
+            type="com.harish.smartclassroom.data.models.StudentDetails" />
 
 
     </data>
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.fragments.More"
-        android:background="#fff"
-        android:orientation="vertical">
-        <RelativeLayout
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:id="@+id/scroll_main"
+            android:visibility="visible"
             android:layout_width="match_parent"
-            android:layout_height="405dp">
-            <LinearLayout
-                android:background="@drawable/gradientbackground"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_main"
                 android:layout_width="match_parent"
-                android:layout_height="350dp"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:background="@color/alabaster"
+                android:visibility="visible">
+
+
                 <ImageView
-                    android:layout_marginTop="45dp"
-                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/imageView5"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
-                    android:src="@drawable/ic_student"/>
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_student" />
+
                 <TextView
-                    android:layout_marginTop="10dp"
-                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Wiliam Snoe"
-                    android:textColor="#fff"
-                    android:textStyle="bold"
-                    android:textSize="21sp"/>
-            </LinearLayout>
-            <androidx.cardview.widget.CardView
-                android:layout_width="400dp"
-                android:layout_height="120dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="275dp">
-                <LinearLayout
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/noto_sans"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView5"
+                    app:layout_constraintStart_toStartOf="@+id/imageView5"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView5"
+                    tools:text="Student Name" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:weightSum="3">
-                    <LinearLayout
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:backgroundTint="@color/black"
+                    app:cardCornerRadius="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_name">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Photos"
-                            android:textSize="20sp"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="125"
-                            android:textStyle="bold"
-                            android:textSize="20sp"
-                            android:paddingTop="10dp"
-                            android:textColor="@color/register_bk_color"/>
 
-                    </LinearLayout>
-                    <LinearLayout
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                        <TextView
+                            android:id="@+id/tv_sem"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/roboto_thin"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView10"
+                            tools:text="Semester S1" />
+
+                        <TextView
+                            android:id="@+id/textView10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/noto_sans"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:elevation="10dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="Academic Details" />
+
+                        <TextView
+                            android:id="@+id/tv_batch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="16dp"
+                            android:fontFamily="@font/roboto_thin"
+                            android:text="Batch : Computer Science"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/tv_sem"
+                            app:layout_constraintHorizontal_bias="0.504"
+                            app:layout_constraintStart_toStartOf="@+id/tv_sem"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_sem"
+                            app:layout_constraintVertical_bias="0.0" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="#ffcc4d"
+                    app:cardCornerRadius="8dp"
+                    app:layout_constraintEnd_toEndOf="@+id/cardView"
+                    app:layout_constraintStart_toStartOf="@+id/cardView"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Followers"
-                            android:textSize="20sp"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="1205"
-                            android:textStyle="bold"
-                            android:textSize="20sp"
-                            android:paddingTop="10dp"
-                            android:textColor="@color/register_bk_color"/>
 
-                    </LinearLayout>
-                    <LinearLayout
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                        <TextView
+                            android:id="@+id/tv_pending_assignments"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/roboto_thin"
+                            android:text="Pending  : 8"
+                            android:textColor="#E10202"
+                            android:textSize="18sp"
+                            app:layout_constraintEnd_toEndOf="@+id/tv_total_assignment"
+                            app:layout_constraintStart_toStartOf="@+id/tv_total_assignment"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_total_assignment" />
+
+                        <TextView
+                            android:id="@+id/tv_total_assignment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_thin"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/textView14"
+                            app:layout_constraintTop_toTopOf="@+id/textView14"
+                            tools:text="Total Assignments : 10" />
+
+                        <TextView
+                            android:id="@+id/textView13"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/noto_sans"
+                            android:text="Your Assignments"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <app.futured.donut.DonutProgressView
+                            android:id="@+id/donut_view_assignment"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_margin="8dp"
+                            android:layout_marginBottom="8dp"
+                            app:donut_bgLineColor="#6f57eb"
+                            app:donut_gapAngle="270"
+                            app:donut_gapWidth="0"
+                            app:donut_strokeWidth="16dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/textView13"
+                            app:layout_constraintTop_toBottomOf="@+id/textView13"
+                            app:layout_constraintVertical_bias="0.064" />
+
+                        <TextView
+                            android:id="@+id/textView14"
+                            android:layout_width="1dp"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="16dp"
+                            android:background="@color/darkGray"
+                            app:layout_constraintBottom_toBottomOf="@+id/donut_view_assignment"
+                            app:layout_constraintStart_toEndOf="@+id/donut_view_assignment"
+                            app:layout_constraintTop_toTopOf="@+id/donut_view_assignment" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="@color/dullblue"
+                    app:cardCornerRadius="8dp"
+                    app:layout_constraintEnd_toEndOf="@+id/cardView2"
+                    app:layout_constraintStart_toStartOf="@+id/cardView2"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView2">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent">
+
                         <TextView
+                            android:id="@+id/tv_pending_exam"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Following"
-                            android:textSize="20sp"
-                            />
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/roboto_thin"
+                            android:text="Pending :8"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            app:layout_constraintEnd_toEndOf="@+id/tv_total_exams"
+                            app:layout_constraintStart_toStartOf="@+id/tv_total_exams"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_total_exams" />
+
                         <TextView
+                            android:id="@+id/tv_total_exams"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="360"
+                            android:fontFamily="@font/roboto_thin"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/textView18"
+                            app:layout_constraintTop_toTopOf="@+id/textView18"
+                            tools:text="Total Exams : 9" />
+
+                        <app.futured.donut.DonutProgressView
+                            android:id="@+id/donut_view_exams"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_margin="8dp"
+                            android:layout_marginBottom="16dp"
+                            app:donut_bgLineColor="@color/white"
+                            app:donut_gapAngle="270"
+                            app:donut_gapWidth="0"
+                            app:donut_strokeWidth="16dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/textView17"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/textView17"
+                            app:layout_constraintTop_toBottomOf="@+id/textView17"
+                            app:layout_constraintVertical_bias="0.0" />
+
+                        <TextView
+                            android:id="@+id/textView17"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/noto_sans"
+                            android:text="Your Exams  "
+                            android:textColor="@color/white"
+
+                            android:textSize="18sp"
                             android:textStyle="bold"
-                            android:textSize="20sp"
-                            android:paddingTop="10dp"
-                            android:textColor="@color/register_bk_color"/>
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                    </LinearLayout>
-                </LinearLayout>
+                        <TextView
+                            android:id="@+id/textView18"
+                            android:layout_width="1dp"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="16dp"
+                            android:background="#ffcc4d"
+                            app:layout_constraintBottom_toBottomOf="@+id/donut_view_exams"
+                            app:layout_constraintStart_toEndOf="@+id/donut_view_exams"
+                            app:layout_constraintTop_toBottomOf="@+id/textView17" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.cardview.widget.CardView>
-        </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="#EA1010"
+                    android:text="LOG OUT"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView3" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        </LinearLayout>
+        </ScrollView>
 
-        
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/cl_load"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/loading_animationView"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="156dp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.495"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/studentload" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/noto_sans"
+                android:text="Please wait ... We are fetching your details"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="@+id/loading_animationView"
+                app:layout_constraintStart_toStartOf="@+id/loading_animationView"
+                app:layout_constraintTop_toBottomOf="@+id/loading_animationView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-   </layout>
+
+
+
+</layout>
