@@ -3,6 +3,7 @@ package com.harish.smartclassroom.ui.fragments
 import android.app.Application
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,12 +13,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import app.futured.donut.DonutSection
 import com.harish.smartclassroom.R
-import com.harish.smartclassroom.adapters.AssignmentAdapter
 import com.harish.smartclassroom.data.AppData
 import com.harish.smartclassroom.data.models.StudentDetails
 import com.harish.smartclassroom.viewmodels.HomeViewModel
 import com.harish.smartclassroom.viewmodels.HomeViewModelFactory
-import kotlinx.android.synthetic.main.activity_quiz_result.*
 import kotlinx.android.synthetic.main.fragment_more.*
 import kotlinx.android.synthetic.main.fragment_more.donut_view_exams
 
@@ -27,34 +26,56 @@ class More : Fragment() {
     private lateinit var root: View
     private lateinit var appData : AppData
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Log.e("View created ","called")
+    }
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        Log.e("on created ","called")
+
+
         root= inflater.inflate(R.layout.fragment_more, container, false)
         initViewModel(requireActivity().application)
         appData = AppData.init(requireContext())
 
-        viewModel.getStudentDetails("1")
+        //viewModel.getStudentDetails("1")
+        setupObservers()
        // appData.getStudentDict()?.stud_id?.let { viewModel.getStudentDetails(it) }
+
+        viewModel.getStudentDetails("1",onSuccess = {
+            response ->
+            response?.let { renderUI(it) }
+        },onFailure = {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+        })
+
         return root
     }
     override fun onResume() {
         super.onResume()
-        setupObservers()
+       setupObservers()
 
     }
 
     private fun setupObservers() {
+        Log.e("observer","called")
+
         viewModel.apply{
             events.observe(requireActivity(), Observer {
                 Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             })
 
-            studentDetails.observe(requireActivity(), Observer {
-                renderUI(it)
-            })
+//            studentDetails.observe(requireActivity(), Observer {
+//                Log.e("Renderui","passed")
+//
+//                renderUI(it)
+//            })
         }
     }
 
@@ -65,6 +86,12 @@ class More : Fragment() {
 
     private fun renderUI(data : StudentDetails){
 
+
+
+        tv_name.text = data.studentDetails[0].name
+
+
+        Log.e("Renderui","called")
         tv_sem .text = "Semester : ${data.studentDetails[0].semester}"
         tv_batch .text = "Batch : ${data.studentDetails[0].batch}"
 
@@ -77,7 +104,7 @@ class More : Fragment() {
         renderAssignmentDonut(data.studentDetails[0].totalAssignment.toInt(),data.studentDetails[0].pendingAssignment)
         renderExamDonut(data.studentDetails[0].totalExam.toInt(),data.studentDetails[0].pendingExam)
 
-        scroll_main.visibility = View.VISIBLE
+        cl_main.visibility = View.VISIBLE
 
         cl_load.visibility = View.GONE
     }
@@ -91,7 +118,7 @@ class More : Fragment() {
 
         val section2 = DonutSection(
             name = "Pending",
-            color = Color.parseColor("#FA1807"),
+            color = Color.parseColor("#000000"),
             amount = (pendingExam+1).toFloat()
         )
 
@@ -112,7 +139,7 @@ class More : Fragment() {
 
         val section2 = DonutSection(
             name = "Pending",
-            color = Color.parseColor("#FA1807"),
+            color = Color.parseColor("#000000"),
             amount = (pendingAssignment+1).toFloat()
         )
 

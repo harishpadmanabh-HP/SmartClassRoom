@@ -45,14 +45,23 @@ class HomeViewModel( var application: Application) : ViewModel() {
             events.postValue(message)
     })
 
-    fun getStudentDetails(studId:String) = repository.getStudentDetails(studId,onResponse = {
-        status, message, response ->
-        if(status)
-            studentDetails.postValue(response)
-        else
-            events.postValue(message)
 
-    })
+    fun getStudentDetails(studId: String,
+                          onSuccess :(response :StudentDetails?)->Unit,
+                          onFailure:(error:String?)->Unit) = repository.getStudentDetails(studId,
+        onResponse = { status, message, response ->
+            if(status) {
+                onSuccess(response)
+            }
+            else {
+               // state.postValue(Enums.PageState.ERROR)
+                if (message != null) {
+                    onFailure(message)
+                }
+            }
+        })
+
+
 
 
 }
