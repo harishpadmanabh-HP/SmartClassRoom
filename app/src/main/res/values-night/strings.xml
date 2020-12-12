@@ -3,4 +3,7 @@
     <string name="quiz_onboarding_next_question">Swipe to get next question</string>
     <string name="got_it">GOT  IT</string>
     <string name="inst1">This exam consists of multiple choice questions with 4 options out of which one among it is correct</string>
+    <string name="seems_offline">It seems you are OFFLINE !.</string>
+    <string name="error_500">Internal Server Error.Please try after some time</string>
+    <string name="error_internal">Internal Server Error</string>
 </resources>

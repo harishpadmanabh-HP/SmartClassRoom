@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.airbnb.lottie.LottieAnimationView
+
         android:id="@+id/loading_animationView"
         android:layout_width="300dp"
         android:layout_height="300dp"
@@ -18,17 +19,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/noexam" />
+        app:lottie_rawRes="@raw/no_assignments" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tv_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:layout_margin="12dp"
         android:visibility="invisible"
-        android:layout_marginTop="5dp"
         android:fontFamily="@font/noto_sans"
-        android:text="Relax!!! Your Faculties are adding your Exam."
+        android:text="Relax!!! Your Faculties are adding your Assignments."
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/loading_animationView"
         app:layout_constraintStart_toStartOf="@+id/loading_animationView"
         app:layout_constraintTop_toBottomOf="@+id/loading_animationView" />
@@ -87,4 +88,7 @@
         app:layout_constraintEnd_toEndOf="@+id/loading_animationView"
         app:layout_constraintStart_toStartOf="@+id/loading_animationView"
         app:layout_constraintTop_toBottomOf="@+id/loading_animationView" />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
