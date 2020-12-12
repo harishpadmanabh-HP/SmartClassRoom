@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/assignments"
-        android:name="com.app.smartclassroom.ui.fragments.Assignments"
+        android:name="com.apps.smartclassroom.ui.fragments.Assignments"
         android:label="fragment_assignments"
         tools:layout="@layout/fragment_assignments" />
     <fragment
         android:id="@+id/notes"
-        android:name="com.app.smartclassroom.ui.fragments.Notes"
+        android:name="com.apps.smartclassroom.ui.fragments.Notes"
         android:label="fragment_notes"
         tools:layout="@layout/fragment_notes" />
     <fragment
         android:id="@+id/exam"
-        android:name="com.app.smartclassroom.ui.fragments.Exam"
+        android:name="com.apps.smartclassroom.ui.fragments.Exam"
         android:label="fragment_exam"
         tools:layout="@layout/fragment_exam" />
     <fragment
         android:id="@+id/more"
-        android:name="com.app.smartclassroom.ui.fragments.More"
+        android:name="com.apps.smartclassroom.ui.fragments.More"
         android:label="fragment_more"
         tools:layout="@layout/fragment_more" />
 </navigation>

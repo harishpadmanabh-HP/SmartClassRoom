@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".ui.SubmitAssignment"
+    tools:showIn="@layout/activity_submit_assignment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SUBMIT ASSIGNMENT"
+            android:onClick="onSubmit"
+            android:backgroundTint="@color/yellow"
+            android:textColor="@color/black"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_assign_date" />
+
+        <TextView
+            android:id="@+id/tv_assign_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/noto_sans"
+            android:text="TextView"
+            android:textColor="@color/black"
+            android:textSize="18sp"            app:layout_constraintStart_toStartOf="@+id/tv_assign_sub"
+            app:layout_constraintTop_toBottomOf="@+id/tv_assign_sub" />
+
+        <TextView
+            android:id="@+id/tv_assign_sub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/noto_sans"
+            android:text="TextView"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

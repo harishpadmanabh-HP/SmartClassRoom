@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.app.smartclassroom">
+    package="com.apps.smartclassroom">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -16,35 +16,39 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartClassRoom"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.app.smartclassroom.ui.walkthrough.Walkthrough"
-            android:theme="@style/Theme.Walk"
-            ></activity>
-        <activity android:name="com.app.smartclassroom.ui.QuizResult" />
-        <activity android:name="com.app.smartclassroom.ui.StartQuiz"></activity>
-        <activity android:name="com.app.smartclassroom.MainActivity">
+        <activity
+            android:name="com.apps.smartclassroom.ui.SubmitAssignment"
+            android:label="@string/title_activity_submit_assignment"
+            android:theme="@style/Theme.SmartClassRoom.NoActionBar"></activity>
+        <activity
+            android:name="com.apps.smartclassroom.ui.walkthrough.Walkthrough"
+            android:theme="@style/Theme.Walk" />
+        <activity android:name="com.apps.smartclassroom.ui.QuizResult" />
+        <activity android:name="com.apps.smartclassroom.ui.StartQuiz" />
+        <activity android:name="com.apps.smartclassroom.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.app.smartclassroom.ui.Viewnotes" />
-        <activity android:name="com.app.smartclassroom.ui.AddAssignment"></activity>
-        <activity android:name="com.app.smartclassroom.ui.Login" />
-        <activity android:name="com.app.smartclassroom.ui.Register" />
-        <activity android:name="com.app.smartclassroom.ui.StudentHome" />
-        <activity android:name="com.app.smartclassroom.ui.QuizActivity"></activity>
+        <activity android:name="com.apps.smartclassroom.ui.Viewnotes" />
+        <activity android:name="com.apps.smartclassroom.ui.AddAssignment" />
+        <activity android:name="com.apps.smartclassroom.ui.Login" />
+        <activity android:name="com.apps.smartclassroom.ui.Register" />
+        <activity android:name="com.apps.smartclassroom.ui.StudentHome" />
+        <activity android:name="com.apps.smartclassroom.ui.QuizActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
         <receiver
-            android:name="com.app.smartclassroom.ui.timer.TimerExpiredReceiver"
+            android:name="com.apps.smartclassroom.ui.timer.TimerExpiredReceiver"
             android:enabled="true"
             android:exported="false" />
         <receiver
-            android:name="com.app.smartclassroom.ui.timer.TimerNotificationActionReceiver"
+            android:name="com.apps.smartclassroom.ui.timer.TimerNotificationActionReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
