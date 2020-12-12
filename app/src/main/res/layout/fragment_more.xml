@@ -28,7 +28,7 @@
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/stud" />
+                app:srcCompat="@drawable/ic_student" />
 
             <TextView
                 android:id="@+id/tv_name"

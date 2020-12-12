@@ -42,14 +42,17 @@ class More : Fragment() {
 
         //viewModel.getStudentDetails("1")
         setupObservers()
-       // appData.getStudentDict()?.stud_id?.let { viewModel.getStudentDetails(it) }
+        appData.getStudentDict()?.stud_id?.let { id->
 
-        viewModel.getStudentDetails("1",onSuccess = {
-            response ->
-            response?.let { renderUI(it) }
-        },onFailure = {
-            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-        })
+            viewModel.getStudentDetails(id,onSuccess = {
+                    response ->
+                response?.let { renderUI(it) }
+            },onFailure = {
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            })
+        }
+
+
 
 
 
