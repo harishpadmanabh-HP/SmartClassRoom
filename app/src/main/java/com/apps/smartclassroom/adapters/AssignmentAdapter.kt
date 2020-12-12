@@ -43,6 +43,10 @@ class AssignmentAdapter : RecyclerView.Adapter<AssignmentAdapter.AssignmentViewH
                 intent.putExtra("SEM",assignmentsList[position].semester)
                 intent.putExtra("FACULTY_ID",assignmentsList[position].facultyId)
                 intent.putExtra("ASSIGN_IMAGE",assignmentsList[position].assignmentImage)
+                intent.putExtra("ASSIGN_NAME",assignmentsList[position].topic)
+                intent.putExtra("ASSIGN_DATE",assignmentsList[position].submittionDate)
+
+
                 context.startActivity(intent)
             }
         }

@@ -64,6 +64,12 @@ interface Apis {
     @GET("student_details_view.php?")
     fun getStudentDetails(@Query("stud_id") studId : String):Call<StudentDetails>
 
+    @GET("submit_answer.php?")
+    fun submitQuiz(
+        @Query("exam_id")exam_id:String,
+        @Query("stud_id")stud_id:String,
+        @Query("no_of_correct_answer")no_of_correct_answer:String
+    ):Call<SubmitQuizModel>
 
     companion object {
         operator fun invoke(): Apis {

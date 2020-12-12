@@ -1,6 +1,8 @@
 package com.apps.smartclassroom.data.repositories
 
 import android.app.Application
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.apps.smartclassroom.R
 import com.apps.smartclassroom.data.Apis
 import com.apps.smartclassroom.data.models.*
@@ -187,6 +189,35 @@ private   val api = Apis()
                 }
             }
         })
+    }
+
+    fun submitExam(examId: String,studID: String,correctAnswers:String):MutableLiveData<Boolean>{
+        var status = MutableLiveData<Boolean>()
+        api.submitQuiz(examId,studID,correctAnswers).enqueue(object : Callback<SubmitQuizModel>{
+            override fun onFailure(call: Call<SubmitQuizModel>, t: Throwable) {
+               status.postValue(false)
+            }
+
+            override fun onResponse(
+                call: Call<SubmitQuizModel>,
+                response: Response<SubmitQuizModel>
+            ) {
+                if(response.isSuccessful){
+                    if(response.body()!!.status)
+                        status.postValue(true)
+                    else
+                        status.postValue(false)
+
+
+                }else{
+                    status.postValue(false)
+
+                }
+            }
+
+        })
+
+        return status
     }
 
 

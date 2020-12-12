@@ -10,7 +10,8 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_bar_height"
+        android:layout_height="300dp"
+        android:backgroundTint="@color/yellow"
         android:fitsSystemWindows="true"
         android:theme="@style/Theme.SmartClassRoom.AppBarOverlay">
 
@@ -23,18 +24,33 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:toolbarId="@+id/toolbar">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/Theme.SmartClassRoom.PopupOverlay" />
             <ImageView
                 android:id="@+id/iv_assign"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_collapseMode="pin"
+                android:fitsSystemWindows="true"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax"
                 app:popupTheme="@style/Theme.SmartClassRoom.PopupOverlay" />
+
+            <!--            <androidx.appcompat.widget.Toolbar-->
+            <!--                android:id="@+id/toolbar"-->
+            <!--                app:titleTextColor="@color/black"-->
+            <!--                android:backgroundTint="@color/yellow"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="?attr/actionBarSize"-->
+            <!--                app:layout_collapseMode="parallax"-->
+            <!--                />-->
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/iv_upload"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                android:visibility="invisible"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/fileupload" />
 
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>

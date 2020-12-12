@@ -9,11 +9,13 @@ import android.widget.Toast
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import androidx.appcompat.app.AppCompatActivity
 import coil.load
+import com.apps.smartclassroom.MainActivity
 import com.apps.smartclassroom.R
 import com.apps.smartclassroom.data.Apis
 import com.apps.smartclassroom.data.AppData
 import com.apps.smartclassroom.data.models.AddAssignmentResponse
 import com.apps.smartclassroom.extensions.getFileName
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_submit_assignment.*
 import kotlinx.android.synthetic.main.content_scrolling.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -51,22 +53,49 @@ class SubmitAssignment : AppCompatActivity() {
         intent.getStringExtra("ASSIGN_IMAGE")
 
     }
+    val topic by lazy {
+        intent.getStringExtra("ASSIGN_NAME")
+
+    }
+    val due by lazy {
+        intent.getStringExtra("ASSIGN_DATE")
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_submit_assignment)
-        setSupportActionBar(findViewById(R.id.toolbar))
-        findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout).title = "sdfdfvbsdfvsdfv"
+      //  setSupportActionBar(findViewById(R.id.toolbar))
+      //  findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout).title = topic
         iv_assign.load(assignmentImage)
         tv_assign_sub . text = "Subject : ${subject_}"
-      //  tv_assign_date . text = "Due Date : ${} "
+        tv_assign_date . text = "Due Date : ${due} "
 
+        submit.text = "Submit ${topic}"
 
     }
 
     fun onSubmit(view: View) {
-        selectPdfFromStorage()
+
+        MaterialAlertDialogBuilder(this)
+            .setTitle("CAUTION !!!!")
+            .setMessage("Please make sure that your file has been store in your internal storage and not in sd card.")
+            .setCancelable(false)
+            .setIcon(R.drawable.ic_baseline_attach_file_24)
+            .setNegativeButton("Dismiss") { dialog, which ->
+                // Respond to negative button press
+                dialog.dismiss()
+            }
+            .setPositiveButton("Proceed Upload") { dialog, which ->
+
+                iv_assign.visibility = View.GONE
+                iv_upload.visibility = View.VISIBLE
+                selectPdfFromStorage()
+
+            }
+            .show()
+
     }
     private fun selectPdfFromStorage() {
         Toast.makeText(this, "selectPDF", Toast.LENGTH_LONG).show()
@@ -130,6 +159,7 @@ class SubmitAssignment : AppCompatActivity() {
             val filePart =
                 MultipartBody.Part.createFormData("avatar", selectedFile.name, requestFile)
 
+            Toast.makeText(this@SubmitAssignment, "Please wait.Dont quit this page untill the file gets uploaded", Toast.LENGTH_SHORT).show()
             Apis().addAssignment(assign_id,stud_id,filePart).enqueue(object :
                 Callback<AddAssignmentResponse> {
                 override fun onFailure(call: Call<AddAssignmentResponse>, t: Throwable) {
@@ -141,9 +171,17 @@ class SubmitAssignment : AppCompatActivity() {
                     response: Response<AddAssignmentResponse>
                 ) {
                     if (response.isSuccessful){
-                        Toast.makeText(this@SubmitAssignment, response.body()!!.status, Toast.LENGTH_SHORT).show()
-                        Log.e("SUBMIT",response!!.body()!!.message)
+                        if(response!!.body()!!.status){
 
+                           Toast.makeText(this@SubmitAssignment, "Uploaded successfully", Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(this@SubmitAssignment,StudentHome::class.java))
+                        }else{
+                            Toast.makeText(this@SubmitAssignment, "Ooops ! Couldnt Upload File.", Toast.LENGTH_SHORT).show()
+
+                        }
+
+                    }else{
+                        Toast.makeText(this@SubmitAssignment, "Something Went wrong.Try After some time", Toast.LENGTH_SHORT).show()
                     }
 
                 }

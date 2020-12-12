@@ -14,7 +14,7 @@ import com.apps.smartclassroom.data.AppData
 import com.apps.smartclassroom.data.models.StudentDetails
 import com.apps.smartclassroom.viewmodels.HomeViewModel
 import com.apps.smartclassroom.viewmodels.HomeViewModelFactory
-import kotlinx.android.synthetic.main.error_layout.view.*
+import kotlinx.android.synthetic.main.no_exam_layout.view.*
 import kotlinx.android.synthetic.main.fragment_assignments.view.*
 
 class Exam : Fragment() {

@@ -25,7 +25,9 @@ import com.apps.smartclassroom.util.NotificationUtil
 import com.apps.smartclassroom.util.PrefUtil
 import com.apps.smartclassroom.viewmodels.HomeViewModel
 import com.apps.smartclassroom.viewmodels.HomeViewModelFactory
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_quiz.*
+import kotlinx.android.synthetic.main.activity_submit_assignment.*
 import kotlinx.android.synthetic.main.content_timer.*
 import java.util.*
 
@@ -77,7 +79,7 @@ class QuizActivity : AppCompatActivity(),QuizListener {
             quiz.observe(this@QuizActivity, Observer {quizResponse->
 
                 quizTitle = quizResponse.quizDetails[0].examTitle
-                totalQuestions = (quizResponse.question.size)+1
+                totalQuestions = (quizResponse.question.size)
                 examTitle = quizResponse.quizDetails[0].examTitle
                 if(!quizResponse?.question.isNullOrEmpty()){
                     mAdapter.setQuizList(quizResponse.question)
@@ -153,36 +155,54 @@ class QuizActivity : AppCompatActivity(),QuizListener {
 
     }
 
-    fun onQuizFinished(view: View) {
-
+    fun submitQuiz(){
         val quizList = viewModel.quiz.value
         quizList?. let{ quizResponse ->
             quizResponse.question.forEachIndexed { index, question ->
-               val correctAnswer = question.correctAnswer
-               if(!answeredQuestions.isNullOrEmpty()){
-                   answeredQuestions.forEach {
-                       if(it.contains(index)) {
-                           val attemptedAnswer = it.getValue(index)
-                             if(compareAnswer(correctAnswer,attemptedAnswer))
-                                 correctAnswered+=1
-                              else
-                                 wrongAnswered+=1
-                       }
-                   }
-               }
+                val correctAnswer = question.correctAnswer
+                if(!answeredQuestions.isNullOrEmpty()){
+                    answeredQuestions.forEach {
+                        if(it.contains(index)) {
+                            val attemptedAnswer = it.getValue(index)
+                            if(compareAnswer(correctAnswer,attemptedAnswer))
+                                correctAnswered+=1
+                            else
+                                wrongAnswered+=1
+                        }
+                    }
+                }
 
             }
 
         }
 
-        val intent = Intent(this@QuizActivity,QuizResult::class.java)
-        intent.putExtra("total_Questions",totalQuestions)
-        intent.putExtra("correct",correctAnswered)
-        intent.putExtra("wrong",wrongAnswered)
-        intent.putExtra("exam_name",quizTitle)
+        appData.init(this@QuizActivity).getStudentDict()?.stud_id?.let {
+            examid?.let { it1 ->
+                viewModel.submitQuiz(
+                    it1,
+                    it,correctAnswered.toString()).observe(this@QuizActivity, Observer {
+                    if(it){
+                        val intent = Intent(this@QuizActivity,QuizResult::class.java)
+                        intent.putExtra("total_Questions",totalQuestions)
+                        intent.putExtra("correct",correctAnswered)
+                        intent.putExtra("wrong",wrongAnswered)
+                        intent.putExtra("exam_name",quizTitle)
 
-        startActivity(intent)
+                        startActivity(intent)
+                    }else{
+                        Toast.makeText(this@QuizActivity, "Couldn't submit . Please try after some time." , Toast.LENGTH_SHORT).show()
+                    }
+                })
+            }
+        }
 
+
+
+    }
+
+    fun onQuizFinished(view: View) {
+
+     submitQuiz()
 
 
 //        Toast.makeText(this, "Correct Answer = $correctAnswered", Toast.LENGTH_SHORT).show()
@@ -203,6 +223,22 @@ class QuizActivity : AppCompatActivity(),QuizListener {
 
         //updateButtons()
         updateCountdownUI()
+
+        MaterialAlertDialogBuilder(this)
+            .setTitle("CAUTION !!!!")
+            .setMessage("Your time is up.Please Submit your exam.")
+            .setCancelable(false)
+            .setIcon(R.drawable.ic_baseline_attach_file_24)
+
+            .setPositiveButton("Submit") { dialog, which ->
+
+              submitQuiz()
+
+            }
+            .setNegativeButton("EXIT"){dialog, which ->
+                startActivity(Intent(this,StudentHome::class.java))
+            }
+            .show()
     }
 
     private fun startTimer(){
@@ -324,17 +360,17 @@ class QuizActivity : AppCompatActivity(),QuizListener {
     }
 
     fun showTooltip(){
-     val tooltip=   ViewTooltip.on(fab_submit)
-            .text("Click here to submit only after answering all questions.Swipe left or right to get previous and next question.")
-            .position(ViewTooltip.Position.TOP)
-            .color(R.color.black)
-            .clickToHide(true)
-            .autoHide(true,5000)
-            .textColor(R.color.white)
-            .corner(10)
-            .arrowWidth(15)
-            .arrowHeight(15)
-            .show()
+//     val tooltip=   ViewTooltip.on(fab_submit)
+//            .text("Click here to submit only after answering all questions.Swipe left or right to get previous and next question.")
+//            .position(ViewTooltip.Position.TOP)
+//            .color(R.color.black)
+//            .clickToHide(true)
+//            .autoHide(true,5000)
+//            .textColor(R.color.white)
+//            .corner(10)
+//            .arrowWidth(15)
+//            .arrowHeight(15)
+//            .show()
     }
 
 

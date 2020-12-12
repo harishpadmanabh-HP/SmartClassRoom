@@ -17,7 +17,7 @@ class QuizResult : AppCompatActivity() {
     val wrongAnswers by lazy { intent.getIntExtra("wrong",0) }
     val totalQuestions by lazy{ intent.getIntExtra("total_Questions",0)}
     val examName by lazy { intent.getStringExtra("exam_name") }
-    var notAnswered = 0
+    var notAnswered = -1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz_result)
