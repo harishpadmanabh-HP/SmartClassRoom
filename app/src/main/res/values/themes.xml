@@ -18,7 +18,7 @@
         <!-- Primary brand color. -->
         <item name="android:windowTranslucentNavigation">true</item>
         <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/register_bk_color</item>
+        <item name="colorPrimaryVariant">@color/yellow</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>

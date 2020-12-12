@@ -87,4 +87,13 @@ object AppData {
         return studentData
     }
 
+    fun logout(){
+        preferences?.let {
+            val editor = it.edit()
+            editor?.clear()
+            editor.apply()
+
+        }
+    }
+
 }

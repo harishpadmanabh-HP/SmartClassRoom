@@ -1,6 +1,7 @@
 package com.harish.smartclassroom.ui.fragments
 
 import android.app.Application
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,9 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import app.futured.donut.DonutSection
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
+import com.harish.smartclassroom.MainActivity
 import com.harish.smartclassroom.R
 import com.harish.smartclassroom.data.AppData
 import com.harish.smartclassroom.data.models.StudentDetails
@@ -19,6 +23,7 @@ import com.harish.smartclassroom.viewmodels.HomeViewModel
 import com.harish.smartclassroom.viewmodels.HomeViewModelFactory
 import kotlinx.android.synthetic.main.fragment_more.*
 import kotlinx.android.synthetic.main.fragment_more.donut_view_exams
+import kotlinx.android.synthetic.main.fragment_more.view.*
 
 class More : Fragment() {
 
@@ -28,7 +33,6 @@ class More : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.e("View created ","called")
     }
 
 
@@ -37,8 +41,6 @@ class More : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        Log.e("on created ","called")
-
 
         root= inflater.inflate(R.layout.fragment_more, container, false)
         initViewModel(requireActivity().application)
@@ -55,6 +57,8 @@ class More : Fragment() {
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         })
 
+
+
         return root
     }
     override fun onResume() {
@@ -64,18 +68,12 @@ class More : Fragment() {
     }
 
     private fun setupObservers() {
-        Log.e("observer","called")
 
         viewModel.apply{
             events.observe(requireActivity(), Observer {
                 Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             })
 
-//            studentDetails.observe(requireActivity(), Observer {
-//                Log.e("Renderui","passed")
-//
-//                renderUI(it)
-//            })
         }
     }
 
@@ -85,13 +83,7 @@ class More : Fragment() {
     }
 
     private fun renderUI(data : StudentDetails){
-
-
-
         tv_name.text = data.studentDetails[0].name
-
-
-        Log.e("Renderui","called")
         tv_sem .text = "Semester : ${data.studentDetails[0].semester}"
         tv_batch .text = "Batch : ${data.studentDetails[0].batch}"
 
